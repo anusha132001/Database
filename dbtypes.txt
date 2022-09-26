@@ -1,0 +1,171 @@
+CREATE TABLE DLITHE.TRAINEE.EMPLOYEE
+(
+EMOPLOYEE_ID INT,
+FIRSTNAME VARCHAR(100),
+LASTNAME VARCHAR(100),
+SALARY INT,
+AGE INT
+);
+
+CREATE TABLE DLITHE.TRAINEE.DEPARTMENT
+(
+EMPLOYEE_ID INT,
+DEP_NO INT,
+DEP_NAME VARCHAR(30),
+MANAGER_NO INT
+);
+
+CREATE TABLE DLITHE.TRAINEE.LOCATION
+(
+EMPLOYEE_ID INT,
+ADDRESS VARCHAR(100),
+CITY VARCHAR(50),
+PINCODE INT
+);
+
+
+
+
+
+CREATE TABLE DLITHE.TRAINEE.JOB
+(
+EMPLOYEE_ID INT, 
+JOB_ID INT,
+JOB_NAME VARCHAR(50),
+STREAM VARCHAR(50),
+);
+
+
+Data Type	Lower limit				Upper limit				Memory
+bigint	-9,223,372,036,854,775,808	9,223,372,036,854,775,807	8bytes
+int		-2,147,483,648			2,147,483,647                 4bytes
+smallint	-32768				32768					2bytes		
+tinyint	0					255					1byte		
+bit		0 			or		1					1byte
+decimal	10^38+1				10^38					1-9(5bytes)
+												10-19(9bytes)
+												20-28(13bytes)
+												29-38(17bytes)
+numeric	10^38+1				10^38					same as previous		
+money		-922,337,203,685,447.5808	922,337,203,685,447.5807	8bytes
+smallmoney	-214,748.3648		      214,748.3647			4bytes
+float(n)	-1.79E +308 to -2.23E-308,0    2.23E-308,0
+		and 2.23E-308			 and 1.79E +308               4bytes(if n=1-9)
+												8bytes(if n=25-53)		
+real		-3.40E +38 to -1.18E-38,0	1.18E-38 to 3.40E+38		4bytes
+
+datetime	0001-01-01 through 9999-12-31 - 00:00:00.0000000 through	8bytes
+							 23:59:59.9999999
+
+smalldatetime 1900-01-01 through 2079-06-06 - 00:00:00 through 23:59:59  4bytes	
+		
+date		  0001-01-01 through 9999-12-31					 3bytes
+time		  00:00:00.0000000 through 23:59:59.9999999                  5bytes
+
+datetimeoffset 0001-01-01 through 9999-12-31 - 00:00:00 
+		  through 23:59:59.9999999 - -14:00 through +14:00		 10bytes
+
+datetime2	1753-01-01 through 9999-12-31 - 00:00:00.0000000             precision < 3          6 Bytes 
+		through 23:59:59.9999999						precision = 3 or 4    7 Bytes
+												precision > 4          8 Bytes
+				
+char			1 through 8,000 and max is 8,000				n
+varchar			1 through 8,000 and 
+				max is 8,000                                    n or max
+varchar (max)			
+text				0				2,147,483,647		 2,147,483,647bytes
+
+
+Singh.amit0810@gmail.com----8103947499
+
+
+
+
+1)WHAT IS THE CONSTRAINT 
+Constraints are conditions that we can apply on the type of data in a table. That is, we can restrict the type of data that can be stored in a particular column in a table using constraints.
+
+2) HOW MANY TYPES OF CONSTRAINT
+NOT NULL: This constraint tells that we cannot store a null value in a column. That is, if a column is specified as NOT NULL then we will not be able to store null value. Any value should be stored. 
+UNIQUE: This tells that the values in the column should not be same. Each value in the column should be different. 
+PRIMARY KEY: Primary key is a attribute of a table which  uniquely identify each row in a table. Primary key should be unique value .
+FOREIGN KEY: Foreign key is a primary key of another table. Values of foreign key should refer to another table that is values of foreign key should be same as the values present in another table. 
+CHECK: This constraint checks the value entered by user based on certain condition after validating the value it is inserted into the table. So it helps to store the correct values for the fields.
+DEFAULT: This constraint specifies a default value for the particular column when no value is entered by the user.
+
+3)WHAT IS THE USE OF CONSTRAINT
+Constraint can be used in a table so user entered values can be verified. Correct values can be entered in the table. Default constraint can even insert default value if user does not enter any values.
+
+4)WRITE DOWN ONE EXAMPLE OF THE CONSTRAINT
+
+CREATE TABLE Student ( 
+Student_id  int  Primary Key NOT NULL, 
+Student_name varchar(10) NOT NULL,
+Dob varchar(20) ,
+Age int NOT NULL CHECK (AGE <= 18)
+);
+
+
+Composite key specifies to the scenario where two or more columns are used to retrieve unique the information from the table.
+
+
+
+https://dbeaver.io/download/
+
+
+
+CREATE TABLE ANS_DEPARTMENT
+(
+DEP_NO INT PRIMARY KEY, 
+DEP_NAME VARCHAR(30),
+MANAGER_NO INT
+);
+
+
+CREATE TABLE ANS_EMPLOYEE
+(
+EMOPLOYEE_ID INT PRIMARY KEY NOT NULL, 
+NAME VARCHAR(100),
+AGE INT,
+DEP_ID INT FOREIGN KEY REFERENCES ANS_DEPARTMENT(DEP_NO)
+);
+
+CREATE TABLE ANS_LOCATION
+(
+EMPLOYEE_NO INT FOREIGN KEY REFERENCES ANS_EMPLOYEE(EMOPLOYEE_ID),
+LOC_ID INT PRIMARY KEY NOT NULL,
+CITY VARCHAR(50) NOT NULL,
+PINCODE INT UNIQUE
+);
+
+DROP TABLE ANS_LOCATION ;
+
+
+INSERT INTO ANS_DEPARTMENT VALUES(1,'SALES',10);
+INSERT INTO ANS_DEPARTMENT VALUES(2,'ACCOUNTS',11);
+INSERT INTO ANS_DEPARTMENT VALUES(3,'HR',12);
+INSERT INTO ANS_DEPARTMENT VALUES(4,'DEVELOPMENT',13);
+INSERT INTO ANS_DEPARTMENT VALUES(5,'MARKETING',14);
+
+
+INSERT INTO ANS_EMPLOYEE VALUES(2001,'JOHN',25,1);
+INSERT INTO ANS_EMPLOYEE VALUES(2002,'JAMES',26,2);
+INSERT INTO ANS_EMPLOYEE VALUES(2003,'RITHA',30,3);
+INSERT INTO ANS_EMPLOYEE VALUES(2004,'LAURA',26,4);
+INSERT INTO ANS_EMPLOYEE VALUES(2005,'NEENA',28,5);
+INSERT INTO ANS_EMPLOYEE VALUES(2006,'LILLY',25,2);
+
+SELECT * FROM ANS_LOCATION ;
+
+INSERT INTO ANS_LOCATION VALUES(2001,1,'BANGALORE',567345);
+
+INSERT INTO ANS_LOCATION VALUES(1001,2,'MANGALORE',567342);
+INSERT INTO ANS_LOCATION VALUES(2002,3,'SHIMOGA',547345);
+INSERT INTO ANS_LOCATION VALUES(1002,4,'HUBLI',435345);
+INSERT INTO ANS_LOCATION VALUES(2002,5,'DHARWAD',566345);
+INSERT INTO ANS_LOCATION VALUES(1003,6,'MYSORE',567205);
+
+INSERT INTO ANS_LOCATION VALUES(2003,7,'UDUPI',567102);
+
+SELECT * FROM ANS_LOCATION ;
+
+DELETE FROM ANS_LOCATION ;
