@@ -44,3 +44,8 @@ SELECT * from EMPLOYEE_T
 
 UPDATE EMPLOYEE  SET PLACE='Punjab' WHERE ID=102;
 
+SELECT distinct city from HEALTH_RECORD hr 
+
+select * from HEALTH_RECORD hr where Segment ='Consumer' and City in('Orange','Baltimore')
+
+SELECT DISTINCT CITY FROM HEALTH_RECORD;
